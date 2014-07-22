@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body onload="JavaScript:fn()">
+
+<script language="JavaScript"> 
+var can,ctx,image,r;
+function fn()
+{
+r=prompt("Radius?","50");
+r=Number(r);
+can=document.getElementById("can");
+ctx=can.getContext("2d");
+image=document.getElementById("d1");
+ctx.drawImage(image,200,200,25,25);
+fn1();
+}
+var theta=0,image,r=50;
+function fn1()
+{
+ var phi=theta*(Math.PI)/180;
+theta+=15;
+if(theta==360)
+theta=0;
+var X=200+r*Math.cos(phi);
+var Y=200+r*Math.sin(phi);
+ctx.clearRect(0,0,900,900);
+ctx.drawImage(image,X,Y,25,25);
+var e=setTimeout(fn1,100);
+}
+</script>
+<canvas id="can" width="900" height="900"/>
+<img src="star2.jpg" id="d1" style="display:none" width="25" height="25"/>
+</body>
+</html>
