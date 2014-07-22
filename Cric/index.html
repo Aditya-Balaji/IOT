@@ -1,42 +1,126 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World!</title>
+       
     </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
+    
+<body bgcolor="teal" onload="onl()">
+<script src="cordova.js"></script>
+
+    <script src="https://oeqytfdyge.localtunnel.me/socket.io/socket.io.js"></script>
+       <script>
+           
+var socket,canvas,ctx,ax,ay,az,rx,ry,rz,velx=0,vely=0,velz=0,angx=0,angy=0,angz=0;
+          
+           
+function $(name)
+{
+return document.getElementById(name);
+}
+           function onl()
+           {
+               $("s").play();
+             canvas=$("c");
+               ctx=canvas.getContext("2d");
+     ctx.drawImage($("b"),0,0,300,300);
+           }
+            function f2()
+           {
+               document.getElementById("xyz").style.display="block";
+               $("menu").style.display="none";
+               $("a").style.display="none";
+               
+               $("c").style.display="none";
+           }
+function f1()
+                 {
+                 document.getElementById("xyz").style.display="none";
+                     $("q").style.display="block";
+                     $("menu").style.display="block";
+               $("a").style.display="block";
+               $("b").style.display="none";
+               $("c").style.display="block";
+                      canvas=$("c");
+               ctx=canvas.getContext("2d");
+               ctx.drawImage($("c1"),0,0,300,600);
+                     socket=io.connect("https://oeqytfdyge.localtunnel.me");
+                     
+                     
+                             alert("connected");  
+                    setInterval(f10,100);
+    
+
+                     
+                 }
+           window.addEventListener("deviceorientation",function(event){
+    var eta=event.alpha;
+    var etb=event.beta;
+    var etg=event.gamma;
+               
+             
+    var et2=""+eta+":"+etb+":"+etg;
+    
+       socket.emit('move',et2);
+     
+    
+}, true);
+     var tt=0;
+           var ans;
+           function f10()
+           {
+            
+               socket.on("out",function(data)
+                     {
+                         
+                         if(typeof(Storage)!="undefined"){
+                             var j1=Number(localStorage.getItem("runs"));
+                            if(Number(data)>j1)
+                            {localStorage.setItem("runs",(data));
+                            
+                            }
+                             if(tt==0)
+                             {alert(localStorage.getItem("runs"));
+                              tt++;
+                             }
+                         }
+                     });
+           }
+        function f5()
+           {
+           if(localStorage.getItem("runs")==null)
+               localStorage.setItem("runs",0);
+               alert(localStorage.getItem("runs"));
+           }
+           function f7()
+           {
+               socket.emit('play',{});
+           }
+</script>
+    <div id="xyz">
+        <li style="background-color:green">
+            <a href="javascript:f1()"><p style="font-size:20px">
+                
+                <b>START!</b></p></a>
+        </li>
+        <br><br>
+        <li style="background-color:yellow"><a href="javascript:f5()"><p style="font-size:20px">
+            
+            <b>
+            HIGH SCORES
+            </b>
+            </p></a></li>
+        <br><br>
+    </div>
+    <button type="button" onclick="f1()" id="a" style="display:none">
+    START</button>
+    <button id="q" onclick="f7()" style="display:none;font-size:20px;">
+        Play
+    </button>
+
+    <canvas id="c" width="300" height="300"></canvas>
+    <img src="img/cric.jpg" id="c1" style="display:none"/>
+       <img id="b" src="img/batsman1.jpg" style="display:none"/>
+    <button id="menu" onclick="f2()">Back</button>
+    <audio id="s" src="img/Voice 003.3ga" controls></audio>
+
     </body>
 </html>
